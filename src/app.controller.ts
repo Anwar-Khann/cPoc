@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, HttpStatus, Res } from '@nestjs/common';
 import { AppService } from './app.service';
 import { request } from '../utils/requestDto';
 
@@ -12,10 +12,12 @@ export class AppController {
   }
 
   @Post()
-
-  async generateQr(@Body() requestDto: request) {
-    // const{tokenAddress,to,amount} = requestDto;
-     await this.appService.generateQr(requestDto);
+  async generateQrr(@Body() requestDto: request, @Res() res:any) {
+    try {
+      const qrCode = await this.appService.generateQr(requestDto);
+      res.json(qrCode);
+    } catch (error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'QR code generation failed' });
+    }
   }
-
 }

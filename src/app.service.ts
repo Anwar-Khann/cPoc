@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { request } from '../utils/requestDto';
-//@ts-ignore
-import EthereumQRPlugin = require('ethereum-qr-code');
+import * as EthereumQRPlugin from 'ethereum-qr-code';
 
 @Injectable()
 export class AppService {
@@ -15,16 +14,15 @@ export class AppService {
     try {
       console.log('before the initialization')
       // Create an instance of EthereumQRPlugin
-      const qr:EthereumQRPlugin = new EthereumQRPlugin();
+      const qr = new EthereumQRPlugin() as any;
       console.log('after the initialization');
+      console.log("the instantiation",qr)
 
       // Define the data object for the transfer function of the ERC20 contract
       const data = 
         {
           "to": tokenAddress,
-          "from": "0xsenderaddress",
-          "value": 0,
-          "gas": 100000,
+          "chainId": 1,
           "mode": "contract_function",
           "functionSignature": {
             "name": "transfer",
@@ -50,7 +48,7 @@ export class AppService {
               "value": amount
             }
           ]
-        }
+        };
       console.log('before the qr code generation');
 
       // Generate QR code using the provided data object
