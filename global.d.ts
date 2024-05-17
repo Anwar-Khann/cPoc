@@ -1,5 +1,6 @@
 // types/ethereum-qr-code.d.ts
 declare module'ethereum-qr-code' 
+declare module 'qrcode-terminal'
     // export class EthereumQRPlugin {
     //   toAddressString(config: object): string;
     //   toCanvas(config: object, options: { selector: string }): Promise<{ value: string }>;

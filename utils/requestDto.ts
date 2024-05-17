@@ -4,4 +4,12 @@ interface request {
     amount:number,
 }
 
-export {request} ;
+interface crypoVerse{
+    contract : string,
+    merchantId:number,
+    amount:number,
+    tokenAddress:string,
+    processingFee:number
+}
+
+export {request,crypoVerse} ;
